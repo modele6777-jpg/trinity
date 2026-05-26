@@ -1,7 +1,10 @@
-node_modules
-dist
-dist-server
-.env
+node_modules/
+build/
+dist/
+dist-server/
+dev-dist/
+coverage/
 .DS_Store
-*.local
-npm-debug.log*
+*.log
+.env*
+!.env.example

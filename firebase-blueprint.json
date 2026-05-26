@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User's basic information for Saju and Astrology calculations.",
+      "type": "object",
+      "properties": {
+        "nickname": { "type": "string" },
+        "realName": { "type": "string" },
+        "year": { "type": "string" },
+        "month": { "type": "string" },
+        "day": { "type": "string" },
+        "hour": { "type": "string" },
+        "gender": { "type": "string", "enum": ["여", "남"] },
+        "city": { "type": "string" }
+      },
+      "required": ["year", "month", "day", "gender", "city"]
+    },
+    "User": {
+      "title": "User Document",
+      "description": "Main user document containing profile and metadata.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "profile": { "$ref": "UserProfile" },
+        "lastLogin": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Activity": {
+      "title": "User Activity",
+      "description": "A record of a user's interaction (Saju reading, chat, etc.).",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["DAILY", "QUICK", "CHAT", "VISION", "CHECKIN"] },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Primary user document."
+    },
+    "/users/{userId}/history/{activityId}": {
+      "schema": "Activity",
+      "description": "Subcollection of user activities and readings."
+    },
+    "/sharedState/{docId}": {
+      "schema": { "type": "object", "properties": { "sourceApp": { "type": "string" } } },
+      "description": "Shared application state (e.g. for PWA/stand-alone detection)."
+    }
+  }
+}

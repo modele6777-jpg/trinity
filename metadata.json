@@ -1,0 +1,8 @@
+{
+  "name": "TRINITY",
+  "description": "사주, 타로, 점성술을 통합한 초정밀 지능형 AI 페르소나 루시와 함께하는 특별한 여정",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": []
+}
